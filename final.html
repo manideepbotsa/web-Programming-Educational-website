@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EduPortal - Final Summary</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif; margin: 0; background: #f4f4f4;
+      /* Add padding to prevent content from being hidden by the fixed footer */
+      padding-bottom: 5rem;
+    }
+    header {
+      background-color: #5b2c6f; color: white;
+      text-align: center; padding: 1.5rem;
+    }
+    footer {
+      background-color: #5b2c6f; color: white;
+      text-align: center; padding: 1.5rem;
+      position: fixed; bottom: 0; width: 100%;
+      box-sizing: border-box;
+    }
+    main {
+      padding: 2rem; max-width: 900px; margin: auto;
+    }
+    h2 { color: #5b2c6f; }
+    .section {
+      background: white; padding: 1.5rem; border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1); margin-bottom: 2rem;
+    }
+    p { margin: 0.5rem 0; }
+    ul { padding-left: 1.5rem; }
+  </style>
+  <script>
+    function loadSummary() {
+      document.getElementById("name").textContent = localStorage.getItem("studentName") || '-';
+      document.getElementById("email").textContent = localStorage.getItem("studentEmail") || '-';
+      document.getElementById("phone").textContent = localStorage.getItem("studentPhone") || '-';
+      document.getElementById("inter").textContent = localStorage.getItem("interPercent") || '-';
+      document.getElementById("jee").textContent = localStorage.getItem("jeePercent") || '-';
+      document.getElementById("info").textContent = localStorage.getItem("studentInfo") || '-';
+      document.getElementById("expect").textContent = localStorage.getItem("studentExpectation") || '-';
+
+      const branch = JSON.parse(localStorage.getItem("selectedBranch"));
+      if (branch) {
+        document.getElementById("branchName").textContent = branch.name;
+        document.getElementById("branchDuration").textContent = branch.duration;
+        document.getElementById("branchFee").textContent = branch.fee;
+        document.getElementById("branchOutcome").textContent = branch.outcome;
+        document.getElementById("branchHighlights").innerHTML = branch.highlights.map(h => `<li>${h}</li>`).join('');
+      } else {
+        document.getElementById("branchDetails").innerHTML = '<p>No branch selected.</p>';
+      }
+    }
+
+    window.onload = loadSummary;
+  </script>
+</head>
+<body>
+  <header>
+    <h1>Final Submission Summary</h1>
+    <p>Review all details before final admission submission</p>
+  </header>
+
+  <main>
+    <div class="section">
+      <h2>Student Information</h2>
+      <p><strong>Name:</strong> <span id="name"></span></p>
+      <p><strong>Email:</strong> <span id="email"></span></p>
+      <p><strong>Phone Number:</strong> <span id="phone"></span></p>
+      <p><strong>Intermediate Percentage:</strong> <span id="inter"></span></p>
+      <p><strong>JEE Mains Percentage:</strong> <span id="jee"></span></p>
+      <p><strong>Achievements / Interests:</strong> <span id="info"></span></p>
+      <p><strong>Expectations from Institution:</strong> <span id="expect"></span></p>
+    </div>
+
+    <div class="section" id="branchDetails">
+      <h2>Selected Branch Details</h2>
+      <p><strong>Branch:</strong> <span id="branchName"></span></p>
+      <p><strong>Duration:</strong> <span id="branchDuration"></span></p>
+      <p><strong>Fee:</strong> <span id="branchFee"></span></p>
+      <p><strong>Highlights:</strong></p>
+      <ul id="branchHighlights"></ul>
+      <p><strong>After Completion:</strong> <span id="branchOutcome"></span></p>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 EduPortal. All rights reserved.</p>
+  </footer>
+</body>
+</html>

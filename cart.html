@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EduPortal - Choose Your Stream</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; background: #f4f4f4; }
+    header {
+      background-color: #5b2c6f; color: white; text-align: center;
+      padding: 1.5rem;
+    }
+    footer{
+      background-color: #5b2c6f; color: white; text-align: center;
+      padding: 1.5rem;
+      position: absolute;
+      bottom: 0;
+      width: 97%;
+    }
+    main { padding: 2rem; max-width: 1000px; margin: auto; }
+    h2, h3 { color: #5b2c6f; }
+    .stream-selection {
+      display: flex; justify-content: center; gap: 2rem; margin-bottom: 2rem;
+    }
+    .stream-selection button {
+      padding: 1rem 2rem; font-size: 1rem; font-weight: bold;
+      background: #8e44ad; color: white; border: none; border-radius: 6px;
+      cursor: pointer;
+    }
+    .stream-selection button:hover { background: #7d3c98; }
+    .branch-card {
+      background: white; padding: 1rem; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      margin-bottom: 1.5rem;
+    }
+    .branch-card h4 { margin: 0.5rem 0; }
+    .branch-card ul { padding-left: 1.5rem; }
+    .branch-card button {
+      margin-top: 1rem; padding: 0.5rem 1rem; background: #8e44ad;
+      color: white; border: none; border-radius: 4px; font-weight: bold; cursor: pointer;
+    }
+    .branch-card button:hover { background: #7d3c98; }
+  </style>
+  <script>
+    const branches = {
+      Tech: [
+        {
+          name: "Computer Science & Engineering (CSE)",
+          duration: "4 Years",
+          fee: "INR 3.2 Lakhs",
+          highlights: ["Strong programming foundation", "Industry-aligned curriculum", "Internship & placement support"],
+          outcome: "Software Developer, AI/ML Engineer, Backend Engineer"
+        },
+        {
+          name: "Artificial Intelligence & Machine Learning (AIML)",
+          duration: "4 Years",
+          fee: "INR 3.3 Lakhs",
+          highlights: ["Neural networks & AI labs", "Project-based learning", "Modern tools & platforms"],
+          outcome: "AI Developer, ML Engineer, Data Scientist"
+        },
+        {
+          name: "CSE with Data Science",
+          duration: "4 Years",
+          fee: "INR 3.4 Lakhs",
+          highlights: ["Data handling & analysis", "Big Data tools", "Python, R & SQL mastery"],
+          outcome: "Data Analyst, Business Intelligence Analyst"
+        },
+        {
+          name: "Information Technology (IT)",
+          duration: "4 Years",
+          fee: "INR 3.0 Lakhs",
+          highlights: ["Web & App development", "IT Security basics", "Database & Cloud training"],
+          outcome: "Web Developer, IT Consultant, DevOps Engineer"
+        }
+      ],
+      Core: [
+        {
+          name: "Electronics & Communication Engineering (ECE)",
+          duration: "4 Years",
+          fee: "INR 3.1 Lakhs",
+          highlights: ["Digital Systems & VLSI", "Robotics & IoT Labs", "Research-oriented curriculum"],
+          outcome: "Embedded Engineer, Circuit Designer, IoT Specialist"
+        },
+        {
+          name: "Electrical & Electronics Engineering (EEE)",
+          duration: "4 Years",
+          fee: "INR 3.0 Lakhs",
+          highlights: ["Power systems & drives", "Control & Automation", "Renewable energy modules"],
+          outcome: "Electrical Engineer, Control Engineer"
+        },
+        {
+          name: "Mechanical Engineering",
+          duration: "4 Years",
+          fee: "INR 3.2 Lakhs",
+          highlights: ["Thermodynamics & Machines", "CAD/CAM/CAE", "Industrial automation"],
+          outcome: "Mechanical Design Engineer, Thermal Analyst"
+        },
+        {
+          name: "Civil Engineering",
+          duration: "4 Years",
+          fee: "INR 2.8 Lakhs",
+          highlights: ["Structural Design & Surveying", "AutoCAD & STAADPro training", "Site project internships"],
+          outcome: "Site Engineer, Structural Analyst"
+        }
+      ]
+    };
+
+    function displayBranches(streamType) {
+      const container = document.getElementById("branches");
+      container.innerHTML = "";
+      branches[streamType].forEach(branch => {
+        const div = document.createElement("div");
+        div.className = "branch-card";
+        div.innerHTML = `
+          <h3>${branch.name}</h3>
+          <p><strong>Duration:</strong> ${branch.duration}</p>
+          <p><strong>Fee:</strong> ${branch.fee}</p>
+          <p><strong>Highlights:</strong></p>
+          <ul>${branch.highlights.map(h => `<li>${h}</li>`).join('')}</ul>
+          <p><strong>After Completion:</strong> ${branch.outcome}</p>
+          <button onclick='selectBranch(${JSON.stringify(branch)})'>Select This Branch</button>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function selectBranch(branch) {
+      localStorage.setItem("selectedBranch", JSON.stringify(branch));
+      // When using frames, we need to target the parent to change the 'main_frame' content
+      if (window.parent && window.parent.main_frame) {
+        window.parent.main_frame.location.href = "final.html";
+      } else { // Fallback for opening the page directly
+        window.location.href = "final.html";
+      }
+    }
+  </script>
+</head>
+<body>
+  <header>
+    <h1>Choose Your Program Stream</h1>
+    <p>Select a path that aligns with your interest and career goals</p>
+  </header>
+
+  <main>
+    <div class="stream-selection">
+      <button onclick="displayBranches('Tech')">IT & Computer Streams</button>
+      <button onclick="displayBranches('Core')">Core Engineering Streams</button>
+    </div>
+    <div id="branches"></div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 EduPortal. All rights reserved.</p>
+  </footer>
+</body>
+</html>

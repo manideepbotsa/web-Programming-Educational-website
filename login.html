@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EduPortal - Admission Form</title>
+  <style>
+    body {
+      font-family: Arial; background: #ecf0f1;
+      display: flex; justify-content: center; align-items: center;
+      height: 100vh; margin: 0;
+    }
+    .form-container {
+      background: white; padding: 2rem; border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1); width: 400px;
+    }
+    h2 { color: #5b2c6f; text-align: center; }
+    label {
+      display: block; margin-top: 1rem; margin-bottom: 0.3rem;
+      font-weight: bold; color: #5b2c6f;
+    }
+    input, textarea {
+      width: 100%; padding: 0.5rem;
+      border: 1px solid #ccc; border-radius: 5px;
+    }
+    input[type="text"], input[type="email"], input[type="tel"] {
+      appearance: none; -moz-appearance: textfield;
+    }
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none; margin: 0;
+    }
+    button {
+      width: 100%; padding: 0.6rem; margin-top: 1rem;
+      background: #8e44ad; color: white;
+      border: none; border-radius: 5px;
+      font-weight: bold; cursor: pointer;
+    }
+    button:hover { background: #7d3c98; }
+    .message {
+      margin-top: 1rem; color: #5b2c6f; font-weight: bold; text-align: center; display: none;
+    }
+  </style>
+  <script>
+    function handleSubmit(event) {
+      event.preventDefault();
+      localStorage.setItem("studentName", document.getElementById("name").value);
+      localStorage.setItem("studentEmail", document.getElementById("email").value);
+      localStorage.setItem("studentPhone", document.getElementById("phone").value);
+      localStorage.setItem("interPercent", document.getElementById("inter").value);
+      localStorage.setItem("jeePercent", document.getElementById("jee").value);
+      localStorage.setItem("studentInfo", document.getElementById("info").value);
+      localStorage.setItem("studentExpectation", document.getElementById("expect").value);
+
+      document.getElementById("message").style.display = "block";
+
+      setTimeout(() => {
+        // When using frames, we need to target the parent to change the 'main_frame' content
+        if (window.parent && window.parent.main_frame) {
+          window.parent.main_frame.location.href = "cart.html";
+        } else { // Fallback for opening the page directly
+          window.location.href = "cart.html";
+        }
+      }, 2000);
+    }
+  </script>
+</head>
+<body>
+
+  <div class="form-container">
+    <h2>Student Admission Form</h2>
+    <form onsubmit="handleSubmit(event)">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" required />
+
+      <label for="email">Gmail ID</label>
+      <input type="email" id="email" required />
+
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" required />
+
+      <label for="inter">Intermediate Percentage</label>
+      <input type="text" id="inter" inputmode="decimal" required />
+
+      <label for="jee">JEE Mains Percentage</label>
+      <input type="text" id="jee" inputmode="decimal" required />
+
+      <label for="info">Achievements or Interests (e.g. Dance, Coding, etc.)</label>
+      <textarea id="info" rows="3" required></textarea>
+
+      <label for="expect">What are you expecting from our institution?</label>
+      <textarea id="expect" rows="3" required></textarea>
+
+      <button type="submit">Submit</button>
+    </form>
+    <div class="message" id="message">✅ Details submitted! Redirecting to course selection...</div>
+  </div>
+
+</body>
+</html>
