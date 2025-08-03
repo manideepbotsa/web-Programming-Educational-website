@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Navigation</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; background: #f4f4f4; overflow: hidden; }
+    header {
+      background-color: #5b2c6f;
+      color: white;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .logo {
+      height: 60px;
+      mix-blend-mode: hard-light;
+      border-radius: 52%;
+    }
+    .header-text h1, .header-text p {
+      margin: 0;
+    }
+    nav { background-color: #7d3c98; display: flex; justify-content: center; gap: 2rem; padding: 1rem; }
+    nav a {
+      color: white; text-decoration: none; font-weight: bold; font-size: 1rem;
+    }
+    nav a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <!-- Make sure you have an image named 'images.png' in the same folder, or update the src path -->
+    <img src="images.png" alt="Institute Logo" class="logo">
+    <div class="header-text">
+      <h1>Vignan Institute of Technology and Science </h1>
+      <p>Welcome to vignanPortal - Course Selection System</p>
+    </div>
+  </header>
+
+  <nav>
+    <a href="login.html" target="main_frame">Login</a>
+    <a href="cart.html" target="main_frame">Cart</a>
+    <a href="final.html" target="main_frame">Final Summary</a>
+  </nav>
+
+</body>
+</html>
