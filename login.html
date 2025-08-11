@@ -54,15 +54,7 @@
 
       document.getElementById("message").style.display = "block";
 
-      setTimeout(() => {
-        // When using frames, we need to target the parent to change the 'main_frame' content
-        if (window.parent && window.parent.main_frame) {
-          window.parent.main_frame.location.href = "cart.html";
-        } else { // Fallback for opening the page directly
-          window.location.href = "cart.html";
-        }
-      }, 2000);
-    }
+     
   </script>
 </head>
 <body>
@@ -98,3 +90,4 @@
 
 </body>
 </html>
+
