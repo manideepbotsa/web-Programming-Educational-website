@@ -103,35 +103,6 @@
         }
       ]
     };
-
-    function displayBranches(streamType) {
-      const container = document.getElementById("branches");
-      container.innerHTML = "";
-      branches[streamType].forEach(branch => {
-        const div = document.createElement("div");
-        div.className = "branch-card";
-        div.innerHTML = `
-          <h3>${branch.name}</h3>
-          <p><strong>Duration:</strong> ${branch.duration}</p>
-          <p><strong>Fee:</strong> ${branch.fee}</p>
-          <p><strong>Highlights:</strong></p>
-          <ul>${branch.highlights.map(h => `<li>${h}</li>`).join('')}</ul>
-          <p><strong>After Completion:</strong> ${branch.outcome}</p>
-          <button onclick='selectBranch(${JSON.stringify(branch)})'>Select This Branch</button>
-        `;
-        container.appendChild(div);
-      });
-    }
-
-    function selectBranch(branch) {
-      localStorage.setItem("selectedBranch", JSON.stringify(branch));
-      // When using frames, we need to target the parent to change the 'main_frame' content
-      if (window.parent && window.parent.main_frame) {
-        window.parent.main_frame.location.href = "final.html";
-      } else { // Fallback for opening the page directly
-        window.location.href = "final.html";
-      }
-    }
   </script>
 </head>
 <body>
@@ -152,4 +123,5 @@
     <p>&copy; 2025 EduPortal. All rights reserved.</p>
   </footer>
 </body>
+
 </html>
